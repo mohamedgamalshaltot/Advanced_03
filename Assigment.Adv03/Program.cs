@@ -148,6 +148,37 @@
             Console.WriteLine(string.Join(", ", PhoneBook.Values));
 
             #endregion
+            #region Exercise 4: Unique Email Validator
+            // 1. Create a HashSet<string> with a case-insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            // 2 Add these emails: "ahmed@test.com", "AHMED@test.com", "sara@test.com", "Sara@Test.Com"
+          
+            {
+                "ahmed@test.com", 
+                "AHMED@test.com",
+                "sara@test.com", 
+                "Sara@Test.Com"
+
+            };
+            // 3 Print Count — how many are actually stored? Explain why.
+                Console.WriteLine($"Count of unique emails: {emails.Count}"); // Count هتكون 2 بس عشان الـ HashSet مش بيسمح بتكرار العناصر وده بيحصل بسبب الـ case-insensitive comparer اللي استخدمناه
+           
+            //4 Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            HashSet <int> setA = [ 1, 2, 3, 4, 5 ];
+            HashSet <int> setB = [4, 5, 6, 7, 8];
+
+            // 5 Print the result of: UnionWith, IntersectWith, ExceptWith
+            setA.UnionWith(setB);
+            Console.WriteLine($"Union of A and B: {string.Join(", ", setA)}"); // هتطبع 1,2,3,4,5,6,7,8
+            setA.IntersectWith(setB);
+            Console.WriteLine($"Intersection of A and B: {string.Join(", ", setA)}"); // هتطبع 4,5
+            setA.ExceptWith(setB);
+            Console.WriteLine($"Difference of A and B: {string.Join(", ", setA)}"); // هتطبع 1,2,3
+                                                                                    // 6 Use IsSubsetOf to check if {1,2} is a subset of Set A
+            HashSet<int> subset = [1, 2];
+            bool isSubset = subset.IsSubsetOf(setA);
+            Console.WriteLine($"Is {{1,2}} a subset of A? {isSubset}");
+            #endregion
             #region Exercise 6: Browser History (Undo)
             // 1. Create a Stack<string> for browser history and push 5 URLs
             Stack<string> history = new Stack<string>();
