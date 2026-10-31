@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            #region Exercise 1: Student Grade Manager
+          #region Exercise 1: Student Grade Manager
 
 
 
@@ -43,6 +43,112 @@
             {
                 Console.WriteLine(gradeStr);
             }
+            #endregion
+            #region Exercise 2: Leaderboard
+            SortedDictionary<int, string> leadboard = new SortedDictionary <int, string>()
+            {
+                {500,"Ahmed"},
+                {200,"Sara"},
+                {800,"Ali"},
+                {350,"Mona"}
+
+            };
+
+            // 2. Print all entries (they should be sorted by score automatically)
+            // بنطبع العناصر باستخدام foreach وبنستعرض الـ Key والـ Value
+            foreach (KeyValuePair<int, string> player in leadboard)
+            {
+                Console.WriteLine($"Score: {player.Key} -> Player: {player.Value}");
+            }
+            // 3. Access the first key and first value
+
+            var firstPlayer = leadboard.First();
+            Console.WriteLine($"First Score (Key): {firstPlayer.Key}");
+            Console.WriteLine($"First Player Name (Value): {firstPlayer.Value}");
+
+         
+            // 4. Check if score 500 exists
+           
+            int targetScore = 500;
+            if (leadboard.ContainsKey(targetScore))
+            {
+                Console.WriteLine($"Yes, score {targetScore} exists and belongs to: {leadboard[targetScore]}");
+            }
+            else
+            {
+                Console.WriteLine($"No, score {targetScore} does not exist.");
+            }
+
+            Console.WriteLine("\n=== 5. Safely Get Player with Score 999 ===");
+            // 5. Safely get the player with score 999
+            // بنستخدم TryGetValue عشان نبحث بأمان من غير ما البرنامج يعمل Crash لو الـ Key مش موجود
+            int missingScore = 999;
+            if (leadboard.TryGetValue(missingScore, out string? playerName))
+            {
+                Console.WriteLine($"Player with score {missingScore}: {playerName}");
+            }
+            else
+            {
+                Console.WriteLine($"Score {missingScore} was not found in the leaderboard.");
+            }
+
+            Console.WriteLine("\n=== 6. Remove Player with Score 200 and Print Updated List ===");
+            // 6. Remove the player with score 200 and print the updated list
+            // بنحذف العنصر اللي الـ Key بتاعه 200 باستخدام Remove
+            leadboard.Remove(200);
+            Console.WriteLine("Leaderboard after removing score 200:");
+            foreach (KeyValuePair<int, string> player in leadboard )
+            {
+                Console.WriteLine($"Score: {player.Key} -> Player: {player.Value}");
+            }
+            #endregion
+            #region 
+
+            #endregion
+            #region Exercise 6: Browser History (Undo)
+            // 1. Create a Stack<string> for browser history and push 5 URLs
+            Stack<string> history = new Stack<string>();
+
+            history.Push("google.com");
+            history.Push("github.com");
+            history.Push("stackoverflow.com");
+            history.Push("youtube.com");
+            history.Push("claude.ai"); // دي أحدث صفحة (هتبقي في وش الـ Stack من فوق)
+
+            // 2. Use Peek to see the current page (top of stack)
+            Console.WriteLine($"--- 2. Current Page (Peek) ---");
+            Console.WriteLine($"Current active page: {history.Peek()}"); // هتطبع claude.ai من غير ما تحذفها
+
+            // 3. Press "back" 3 times using Pop — print each page you leave
+            Console.WriteLine($"\n--- 3. Pressing Back 3 Times ---");
+            for (int i = 0; i < 3; i++)
+            {
+                string leftPage = history.Pop();
+                Console.WriteLine($"You left: {leftPage}");
+            }
+
+            // 4. Print the current page after going back
+            Console.WriteLine($"\n--- 4. Current Page After Going Back ---");
+            Console.WriteLine($"Current active page now: {history.Peek()}"); // هتطبع github.com بعد ما رجعنا 3 خطوات
+
+            // 5. Try TryPop on an empty stack — what happens?
+            Console.WriteLine($"\n--- 5. Testing TryPop on Empty Stack ---");
+
+            // خلينا نفضي الـ Stack للاخر عشان نجرب الـ TryPop
+            history.Clear();
+
+            // TryPop بتحاول تحذف وترجع القيمة، ولو الـ Stack فاضي بترجع false ومش بتضرب Exception
+            bool isPopped = history.TryPop(out string? resultPage);
+
+            if (isPopped)
+            {
+                Console.WriteLine($"Popped successfully: {resultPage}");
+            }
+            else
+            {
+                Console.WriteLine("Stack is empty! TryPop safely prevented an exception.");
+            }
+
             #endregion
 
         }
