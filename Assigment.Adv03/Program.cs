@@ -1,4 +1,6 @@
-﻿namespace Assigment.Adv03
+﻿using System.Collections;
+
+namespace Assigment.Adv03
 {
     internal class Program
     {
@@ -178,6 +180,47 @@
             HashSet<int> subset = [1, 2];
             bool isSubset = subset.IsSubsetOf(setA);
             Console.WriteLine($"Is {{1,2}} a subset of A? {isSubset}");
+            #endregion
+            #region Exercise 5: Print Queue Simulator
+            // Simulate a printer queue 
+            // Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf", "Letter.docx", "Resume.pdf", "Photo.jpg"
+            Queue<string> printerQueue = new Queue<string>();
+            printerQueue.Enqueue("Report.pdf");
+            printerQueue.Enqueue("invoice.pdf");
+            printerQueue.Enqueue("Letter.docx");
+            printerQueue.Enqueue("Resume.pdf");
+            printerQueue.Enqueue("Photo.jpg");
+
+            // 1. Print the queue contents and Count
+            Console.WriteLine($"Queue Count: {printerQueue.Count}");
+            Console.WriteLine("Queue Contents:");
+            foreach (var doc in printerQueue)
+            {
+                Console.WriteLine(doc);
+            }
+
+            // 2. Use Peek to see which document will print next (without removing)
+            Console.WriteLine($"Next document to print (Peek): {printerQueue.Peek()}");
+
+            // 3. Process the queue: Dequeue each document and print "Printing: [name]"
+            while (printerQueue.Count > 0)
+            {
+                string doc = printerQueue.Dequeue();
+                Console.WriteLine($"Printing: {doc}");
+            }
+
+            // 4. Try TryDequeue on the now-empty queue — what happens?
+            bool success = printerQueue.TryDequeue(out string currentDoc);
+            if (success)
+            {
+                Console.WriteLine($"Dequeued: {currentDoc}");
+            }
+            else
+            {
+                Console.WriteLine("Queue is empty! TryDequeue returned false safely without any exception.");
+            }
+
+
             #endregion
             #region Exercise 6: Browser History (Undo)
             // 1. Create a Stack<string> for browser history and push 5 URLs
