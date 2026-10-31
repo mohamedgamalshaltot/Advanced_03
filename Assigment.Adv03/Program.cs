@@ -102,7 +102,50 @@
                 Console.WriteLine($"Score: {player.Key} -> Player: {player.Value}");
             }
             #endregion
-            #region 
+            #region Exercise 3: Phone Book
+            Dictionary<string, string> PhoneBook = new Dictionary<string, string>();
+            // 2.Add a new contact using [] syntax (add or update)
+
+            PhoneBook["Ahmed"] = "01012345678";
+            // 3. Try adding a duplicate using .Add() — catch the exception and print the error
+            try
+            {
+                PhoneBook.Add("Ahmed", "01087654321"); // محاولة إضافة نفس الاسم مرة تانية
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}"); // هتطبع رسالة الخطأ
+            }
+            // 4. Try adding a duplicate using .TryAdd() — print whether it succeeded
+            bool isAdded = PhoneBook.TryAdd("Ahmed", "01087654321"); // محاولة إضافة نفس الاسم مرة تانية
+            Console.WriteLine($"TryAdd result for Ahmed: {isAdded}");
+
+            // 5.Search for a contact that doesn’t exist
+            if (PhoneBook.TryGetValue("Mohamed", out string? mohamedPhone))
+            {
+                Console.WriteLine($"Mohamed's phone number: {mohamedPhone}");
+            }
+            else
+            {
+                Console.WriteLine("Contact not found.");
+            }
+            // 6. Get a contact with a fallback of "Not Found"
+            string contactName = "Sara";
+            string? phoneNumber;
+            if (PhoneBook.TryGetValue(contactName, out string? saraPhone))
+            {
+                Console.WriteLine($"{contactName}'s phone number: {saraPhone}");
+            }
+            else
+            {
+                Console.WriteLine($"{contactName}'s phone number: Not Found");
+            }
+            // 7 . Print all Keys on one line, then all Values on another line
+
+            Console.WriteLine("All Keys:");
+            Console.WriteLine(string.Join(", ", PhoneBook.Keys));
+            Console.WriteLine("All Values:");
+            Console.WriteLine(string.Join(", ", PhoneBook.Values));
 
             #endregion
             #region Exercise 6: Browser History (Undo)
